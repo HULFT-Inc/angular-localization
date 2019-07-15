@@ -127,7 +127,8 @@ angular.module('ngLocalize')
                     url += localeConf.fileExtension;
 
                     $http.get(url)
-                    .then(function (data) {
+                    .then(function (response) {
+                      var data = response.data;
                       var key,
                           path = getPath(token);
                       // Merge the contents of the obtained data into the stored bundle.
@@ -153,7 +154,8 @@ angular.module('ngLocalize')
                       if (deferrences[path]) {
                           deferrences[path].resolve(path);
                       }
-                  }, function (err) {
+                  }, function (response) {
+                    var err = response.data;
                     var path = getPath(token);
 
                     $log.error('[localizationService] Failed to load: ' + url);
